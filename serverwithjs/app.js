@@ -29,10 +29,15 @@ app.get('/', (req, res) => {
 })
 
 io.on("connection", (socket) => {
-    console.log("User connected",socket.id)
+    console.log("User connected", socket.id)
 
-    socket.on('message', (data) => {
-        console.log(data)
+    socket.on('message', ({ message, room }) => {
+        console.log({ message, room })
+        io.to(room).emit('recieve-message', room)
+    })  
+
+    socket.on('disconnect', () => {
+        console.log("User connected", socket.id)
     })
 })
 
