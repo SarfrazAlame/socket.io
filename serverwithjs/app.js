@@ -23,13 +23,17 @@ app.use(
         credentials: true,
     })
 );
+
 app.get('/', (req, res) => {
     res.send("hello world")
 })
 
 io.on("connection", (socket) => {
-    console.log("User connected")
-    console.log("Id", socket.id)
+    console.log("User connected",socket.id)
+
+    socket.on('message', (data) => {
+        console.log(data)
+    })
 })
 
 server.listen(port, () => {
