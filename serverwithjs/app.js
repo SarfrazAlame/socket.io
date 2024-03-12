@@ -33,8 +33,8 @@ io.on("connection", (socket) => {
 
     socket.on('message', ({ message, room }) => {
         console.log({ message, room })
-        io.to(room).emit('recieve-message', room)
-    })  
+        io.to(room).emit('receive-message', message)
+    })
 
     socket.on('disconnect', () => {
         console.log("User connected", socket.id)
